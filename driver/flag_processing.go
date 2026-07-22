@@ -50,11 +50,15 @@ func (d *Driver) verifyImageFlags() error {
 }
 
 func (d *Driver) verifyNetworkFlags() error {
-	if !d.UsePrivateNetwork {
-		return d.flagFailure("--%v must be used if public networking is disabled (hint: implicitly set by --%v)",
-			flagUsePrivateNetwork, flagDisablePublic)
-	}
+	return nil
+}
 
+func (d *Driver) setUserDataFlags(opts drivers.DriverOptions) error {
+	d.userData = opts.String(flagUserData)
+	d.userDataFile = opts.String(flagUserDataFile)
+	if d.userData != "" && d.userDataFile != "" {
+		return d.flagFailure("--%v and --%v are mutually exclusive", flagUserData, flagUserDataFile)
+	}
 	return nil
 }
 

@@ -75,6 +75,8 @@ const (
 	flagLocation          = "hetzner-server-location"
 	flagExKeyID           = "hetzner-existing-key-id"
 	flagExKeyPath         = "hetzner-existing-key-path"
+	flagUserData          = "hetzner-user-data"
+	flagUserDataFile      = "hetzner-user-data-file"
 	flagVolumes           = "hetzner-volumes"
 	flagNetworks          = "hetzner-networks"
 	flagUsePrivateNetwork = "hetzner-use-private-network"
@@ -169,6 +171,18 @@ func (d *Driver) GetCreateFlags() []mcnflag.Flag {
 			EnvVar: "HETZNER_EXISTING_KEY_PATH",
 			Name:   flagExKeyPath,
 			Usage:  "Path to existing key (new public key will be created unless --hetzner-existing-key-id is specified)",
+			Value:  "",
+		},
+		mcnflag.StringFlag{
+			EnvVar: "HETZNER_USER_DATA",
+			Name:   flagUserData,
+			Usage:  "Cloud-init based user data (inline)",
+			Value:  "",
+		},
+		mcnflag.StringFlag{
+			EnvVar: "HETZNER_USER_DATA_FILE",
+			Name:   flagUserDataFile,
+			Usage:  "Cloud-init based user data (read from file)",
 			Value:  "",
 		},
 		mcnflag.StringSliceFlag{
@@ -314,6 +328,10 @@ func (d *Driver) setConfigFromFlagsImpl(opts drivers.DriverOptions) error {
 	}
 	d.IsExistingKey = d.KeyID != 0
 	d.originalKey = opts.String(flagExKeyPath)
+
+	if err = d.setUserDataFlags(opts); err != nil {
+		return err
+	}
 
 	d.Volumes = opts.StringSlice(flagVolumes)
 	d.Networks = opts.StringSlice(flagNetworks)
