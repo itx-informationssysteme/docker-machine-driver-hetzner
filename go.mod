@@ -4,8 +4,8 @@ go 1.25.0
 
 require (
 	github.com/docker/machine v0.16.2
-	github.com/hetznercloud/hcloud-go/v2 v2.40.0
-	golang.org/x/crypto v0.50.0
+	github.com/hetznercloud/hcloud-go/v2 v2.45.0
+	golang.org/x/crypto v0.54.0
 )
 
 replace github.com/codegangsta/cli v1.22.14 => github.com/urfave/cli v1.22.14
@@ -25,9 +25,9 @@ require (
 	github.com/prometheus/procfs v0.16.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
-	golang.org/x/net v0.53.0 // indirect
-	golang.org/x/sys v0.43.0 // indirect
-	golang.org/x/term v0.42.0 // indirect
-	golang.org/x/text v0.36.0 // indirect
+	golang.org/x/net v0.57.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
+	golang.org/x/term v0.45.0 // indirect
+	golang.org/x/text v0.40.0 // indirect
 	google.golang.org/protobuf v1.36.8 // indirect
 )
