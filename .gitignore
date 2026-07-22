@@ -13,3 +13,5 @@
 
 # we don't want to include the source files of the dependencies
 vendor
+.leankg/leankg.pid
+.leankg/leankg.db
